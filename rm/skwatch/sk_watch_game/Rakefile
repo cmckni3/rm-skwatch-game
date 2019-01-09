@@ -11,6 +11,9 @@ end
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
 
+  # load shared files
+  app.files += Dir.glob('../shared/**/*.rb')
+
   # Configration for Complication
   app.frameworks += ['ClockKit', 'SpriteKit']
   app.info_plist['CLKComplicationPrincipalClass'] = 'ComplicationController'
