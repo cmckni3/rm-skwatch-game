@@ -2,8 +2,6 @@ class GameScene < SKScene
   def sceneDidLoad
     # Setup your scene here
 
-    NSLog("GameScene loaded")
-
     @triangleNode = TriangleNode.spriteNodeWithImageNamed("triangle")
     @triangleNode.position = CGPointMake(0.51, 1.0/3.0)
     @triangleNode.anchorPoint = CGPointMake(0.51, 1.0/3.0)
@@ -20,7 +18,7 @@ class GameScene < SKScene
   # play/pause the rotation SKAction
   def toggleRotateAction
     if @rotating
-      @triangleNode.paused = true;
+      @triangleNode.paused = true
       @rotating = false
     else
       @triangleNode.paused = false

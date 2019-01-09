@@ -4,7 +4,6 @@ class InterfaceController < WKInterfaceController
   outlet :skInterface, WKInterfaceLabel
 
   def handleTapGesture(sender)
-    NSLog("handleTapGesture %@ %@", self.skInterface.scene, self.skInterface.scene.is_a?(GameScene))
     if self.skInterface.scene.is_a?(GameScene)
       self.skInterface.scene.toggleRotateAction
     end
@@ -20,13 +19,13 @@ class InterfaceController < WKInterfaceController
     scene = GameScene.nodeWithFileNamed("GameScene")
 
     # Set the scale mode to scale to fit the window
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    scene.scaleMode = SKSceneScaleModeAspectFill
 
     # Present the scene
     self.skInterface.presentScene(scene)
 
     # Use a value that will maintain consistent frame rate
-    self.skInterface.preferredFramesPerSecond = 30;
+    self.skInterface.preferredFramesPerSecond = 30
 
     NSLog("%@ awakeWithContext", self)
   end
