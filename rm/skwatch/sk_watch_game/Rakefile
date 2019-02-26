@@ -28,6 +28,52 @@ Motion::Project::App.setup do |app|
     CLKComplicationFamilyExtraLarge
   )
   app.info_plist['WKExtensionDelegateClassName'] = 'ExtensionDelegate'
+
+  # Watch apps require 3 Bundle Identifiers (App Ids in Developer Portal)
+  # and 3 Provisioning Profiles (or a wildcard in development)
+  #   1. The parent iOS app (set in ../Rakefile)
+  #   2. The Watch app itself
+  #   3. The Watch app extension
+
+  # Watch app bundle identifier
+  watch_app_identifier = 'rs.chris.SKWatchGame.watchapp'
+  # Watch app extension identifier
+  app.identifier = 'rs.chris.SKWatchGame.watchapp.watchkitextension'
+
+  # Use motion-provisioning to create provisioning profiles
+  app.development do
+    # Setup watch app certificate and provisioning profile
+    app.watch_app_config.codesign_certificate = MotionProvisioning.certificate(
+      type: :development,
+      platform: :ios)
+
+    app.watch_app_config.provisioning_profile = MotionProvisioning.profile(
+      bundle_identifier: watch_app_identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :development)
+
+    # Setup Watch app extension certificate and provisioning profile
+    app.codesign_certificate = MotionProvisioning.certificate(
+      type: :development,
+      platform: :ios)
+
+    app.provisioning_profile = MotionProvisioning.profile(
+      bundle_identifier: app.identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :development)
+  end
+
+  # Manually configure certificate and provisioning profile
+
+  # See http://www.rubymotion.com/developers/guides/manuals/cocoa/apple-watch/
+  # under the App Store Distribution section
+
+  # app.codesign_certificate = 'My Codesign Certificate'
+  # app.provisioning_profile = './provisioning/com.mycompany.my_app.watchkitextension.mobileprovision'
+  # app.watch_app_config.codesign_certificate = 'My Codesign Certificate'
+  # app.watch_app_config.provisioning_profile = './provisioning/_com.mycompany.my_app.watchapp.mobileprovision'
 end
 
 require 'ib/tasks'

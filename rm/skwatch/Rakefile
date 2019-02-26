@@ -27,7 +27,7 @@ Motion::Project::App.setup do |app|
   # ===========================================================================================
   # 2. Set your app name (this is what will show up under the icon when your app is installed).
   # ===========================================================================================
-  app.name = 'skwatch'
+  app.name = 'SKWatchGame'
 
   # version for your app
   app.version = '1.0'
@@ -47,7 +47,20 @@ Motion::Project::App.setup do |app|
   #    https://developer.apple.com/account/ios/identifier/bundle. You must enroll into Apple's
   #    Developer program to get access to this screen (there is an annual fee of $99).
   # ===========================================================================================
-  # app.identifier = ''
+  app.identifier = 'rs.chris.SKWatchGame'
+
+  # Use motion-provisioning to create provisioning profiles
+  app.development do
+    app.codesign_certificate = MotionProvisioning.certificate(
+      type: :development,
+      platform: :ios)
+
+    app.provisioning_profile = MotionProvisioning.profile(
+      bundle_identifier: app.identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :development)
+  end
 
   # ===========================================================================================
   # 5. If you need to reference any additional iOS libraries, use the config array below.
