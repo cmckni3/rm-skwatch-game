@@ -97,7 +97,7 @@ Motion::Project::App.setup do |app|
   # ===========================================================================================
   # app.entitlements['beta-reports-active'] = true
 
-  app.archs['iPhoneOS'] = ['arm64', 'arm64_32', 'armv7k']
+  app.archs['iPhoneOS'] = ['arm64']
   app.info_plist['UIRequiredDeviceCapabilities'] = ['arm64']
 
   app.target "sk_watch_game", :watchapp
